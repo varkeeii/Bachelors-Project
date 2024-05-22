@@ -1,0 +1,1 @@
+This website is abuot a online Laboratory Store where customers can buy thier desired laboratory equipments. This has mainly three users which are  admin,Staff and Customer.This is managed by admin and Staff
