@@ -1,0 +1,102 @@
+{%include 'customer_header.html'%}
+
+
+{% if data['spro'] %}
+
+<div class="col-md-5 single-right-left animated wow slideInUp" data-wow-delay=".5s">
+    <div class="flexslider">
+        <ul class="slides">
+            <li data-thumb="/{{data['spro'][0]['Item_Image']}}">
+                <div class="thumb-image"> <img src="/{{data['spro'][0]['Item_Image']}}" data-imagezoom="true" class="img-responsive"> </div>
+            </li>
+        
+        </ul>
+    </div>
+    <!-- flixslider -->
+        <script defer src="static/js/jquery.flexslider.js"></script>
+        <link rel="stylesheet" href="static/css/flexslider.css" type="text/css" media="screen" />
+        <script>
+        // Can also be used with $(document).ready()
+        $(window).load(function() {
+          $('.flexslider').flexslider({
+            animation: "slide",
+            controlNav: "thumbnails"
+          });
+        });
+        </script>
+    <!-- flixslider -->
+</div>
+
+<div class="col-md-7 single-right-left simpleCart_shelfItem animated wow slideInRight" data-wow-delay=".5s">
+    <h3>{{data['spro'][0]['Item_Name']}}</h3>
+    <h4><span class="item_price"></span> {{data['spro'][0]['price']}}</h4>
+    
+    <div class="description">
+        <h5><i>Product Details</i></h5>
+        <p>{{data['spro'][0]['Description']}}</p>
+    </div>
+    <div class="color-quality">
+        <div class="color-quality-left">
+            <h5>Category : </h5>
+            <ul>{{data['spro'][0]['Cat_Name']}}
+                <!-- <li><a href="#"><span></span>Red</a></li>
+                <li><a href="#" class="brown"><span></span>Yellow</a></li>
+                <li><a href="#" class="purple"><span></span>Purple</a></li>
+                <li><a href="#" class="gray"><span></span>Violet</a></li> -->
+            </ul>
+        </div>
+        <!-- <div class="color-quality-right">
+            <h5>Quality :</h5>
+            <select id="country1" onchange="change_country(this.value)" class="frm-field required sect">
+                <option value="null">5 Qty</option>
+                <option value="null">6 Qty</option> 
+                <option value="null">7 Qty</option>					
+                <option value="null">10 Qty</option>								
+            </select>
+        </div> -->
+        <div class="clearfix"> </div>
+    </div>
+    <!-- <div class="occasional">
+        <h5>Occasion :</h5>
+        <div class="colr ert">
+            <label class="radio"><input type="radio" name="radio" checked=""><i></i>Casual Wear</label>
+        </div>
+        <div class="colr">
+            <label class="radio"><input type="radio" name="radio"><i></i>Party Wear</label>
+        </div>
+        <div class="colr">
+            <label class="radio"><input type="radio" name="radio"><i></i>Formal Wear</label>
+        </div>
+        <div class="clearfix"> </div>
+    </div> -->
+    <br><br>
+    <div class="occasion-cart">
+
+        {% for row in data['spro']%}
+        {% if data['cartoff'] %}
+        <p><a style="background-color: rgb(45, 173, 248);" class="item_add" href="customer_view_cart">View Cart</a></p>
+        {% else %}
+        <a class="item_add" href="customer_add_tocart?id={{row['Item_ID']}}&iname={{row['Item_Name']}}&price={{row['price']}}&stock={{row['Stock']}}">add to cart </a>
+        {% endif %}
+        {% endfor %}
+
+
+    </div>
+    {% else %} 
+    <span style="color: red;margin-left: 200px;">No Data</span>
+    {% endif %}
+    <div class="social">
+        <!-- <div class="social-left">
+            <p>Share On :</p>
+        </div>
+        <div class="social-right">
+            <ul class="social-icons">
+                <li><a href="#" class="facebook"></a></li>
+                <li><a href="#" class="twitter"></a></li>
+                <li><a href="#" class="g"></a></li>
+                <li><a href="#" class="instagram"></a></li>
+            </ul>
+        </div> -->
+        <div class="clearfix"> </div>
+    </div>
+</div>

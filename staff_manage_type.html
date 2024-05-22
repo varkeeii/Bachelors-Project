@@ -1,0 +1,51 @@
+{% include 'staff_header.html' %}
+
+<center>
+		<form method="post">
+			<h2>Manage Type</h2>
+			<table class="table" style="width: 700px;">
+				<tr>
+					<th>Type Name</th>
+					<td><input type="text" id="sample" name="type" value="{% if data['upd'] %}{{data['upd'][0]['type_name']}}{% endif %}"  pattern="[A-za-z ]+$" required class="form-control"></td>
+				</tr>
+
+				<tr>
+					<td align="center" colspan="2"><input type="submit" {% if data['upd'] %}
+					name="update" value="Update" {% else %} name="submit" value="Submit" {% endif %} class="btn btn-success" style="width: 150px;"></td>
+				</tr>
+				</table>
+
+				<table class="table table-striped" style="width: 700px;">
+					<tr>
+						<th>#</th>
+						<th>Type Name</th>
+						<th>Status</th>
+						<th></th><th></th>
+					</tr>
+					{% for i in data['view'] %}
+					<tr>
+					<td>{{loop.index}}</td>
+					<td>{{i['type_name']}}</td>
+					{% if i ['type_status']=='active' %}
+					<td>Active</td>
+					<td><a href="?action=inactive&ty_id={{i['type_id']}}">Inactive</a></td>
+
+					{% elif i['type_status']=='inactive' %}
+					<td>Inactive</td>
+				<td><a href="?action=active&ty_id={{i['type_id']}}">Active</a></td>
+				{% endif %}
+
+
+
+				<td><a href="?action=update&ty_id={{i['type_id']}}">Update</a></td>
+					<!-- <td><a href="?action=delete&ty_id={{i['type_id']}}">Delete</a></td> -->
+
+
+				</tr>
+
+					{% endfor %}
+					
+				</table>
+		</form>
+</center>
+{% include 'footer.html' %}

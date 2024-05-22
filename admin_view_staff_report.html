@@ -1,0 +1,92 @@
+{% if session['utype'] == 'Staff' %}
+{% include 'staff_header.html' %}
+{% elif session['utype'] == 'admin' %}
+{%include 'admin_header.html'%}
+{% endif %}
+<center>
+    
+        <br>
+        
+        <form method="post">
+          <table style="color: black;width: 100px">
+      
+        <tr>
+            
+              <td  style="color: rgb(23, 21, 21)"> <input type="text" class="form-control" style="width: 300px;" name="staff" placeholder="Search by Staff">  </td>
+      
+              <td align="center" colspan="5"><input type="submit" name="sale" class="btn btn-success" value="SEARCH"></td>
+           <tr>
+            </tr>
+          
+      
+            </tr>
+          </table>
+        </form>
+
+        <style type="text/css">
+    @media print{
+      body,body *{
+        visibility: hidden;
+      }
+      #printsec,#printsec *{
+        visibility: visible !important;
+      }
+      #print{
+        display: none;
+      }
+    }
+  </style>
+
+    <div id="printsec">
+      <center>
+        <link rel="stylesheet" href="static/assets/css/style-starter.css">
+        <font style="font-family:times new roman">
+            <!-- <br><br> -->
+            <h1 style="padding-top: 30px;font-size: 60px; ">Lab Store </h1>
+            <p>
+                <!-- 0926k 4th block, 
+                Attingal, 
+                Trivandrum ,
+                          <br><br> -->
+                      <strong>Phone:</strong> +91 9447129632<br> 
+                      <strong>Email:</strong> Lab Store@gmail.com
+                    </p> <hr>
+      
+<br><h1>Staff Report</h1><br>
+   <form method="post">
+<table class="table table-striped" style="width: 1400px;">
+    <tr>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Housename</th>
+        <th>Street</th>
+        <!-- <th>District</th> -->
+        <th>Pincode</th>
+        
+        
+        
+
+        
+    </tr>
+    {% for i in data['report'] %}
+    <tr>
+        <td>{{ i['Staff_Fname'] }} {{ i['Staff_Lname'] }}</td>
+        <td>{{ i['Staff_Phone'] }}</td>
+        <td>{{ i['Staff_Hname'] }}</td>
+        <td>{{ i['Staff_Street'] }}</td>
+        <!-- <td>{{ i['Staff_Dist'] }}</td> -->
+        <td>{{ i['Staff_Pin'] }}</td>
+        
+        
+        
+        
+        <!-- <td><a href="?action=update&cid={{i['s_id']}}"  class="btn btn-primary">Update</a></td> -->
+        
+    </tr>
+    {% endfor %}
+</table>
+</form>
+<h2><a class="btn btn-success" href="admin_staffreport">print</a></h2>
+
+</div>
+</center>

@@ -1,0 +1,169 @@
+{%include 'admin_header.html'%}
+
+   
+
+                        
+
+    
+
+    <!-- register -->
+    {%if data['up']%}
+    <div class="register" >
+		<div class="container" >
+			<h3 class="animated wow zoomIn" data-wow-delay=".5s">Update Staff Details</h3>
+			
+			<div class="login-form-grids">
+				
+				<form method="post" class="animated wow slideInUp" data-wow-delay=".5s">
+                    
+					<input name="fname" id="fname" type="text" value="{{data['up'][0]['Staff_Fname']}}" placeholder="Fisrt Name" required=""><br>
+					<input name="lname" id="lname" type="text" value="{{data['up'][0]['Staff_Lname']}}" placeholder="Last Name" required=""><br>
+                    <input name="num" id="num" type="text" value="{{data['up'][0]['Staff_Phone']}}" placeholder="Phone Number" required="" maxlength="10"><br>
+                    <input name="hname" id="hname" type="text" value="{{data['up'][0]['Staff_Hname']}}" placeholder="House Name" required=""><br>
+                    <input name="street" id="street" type="text" value="{{data['up'][0]['Staff_Street']}}" placeholder="Street" required=""><br>
+                    <input name="district" id="district" type="text" value="{{data['up'][0]['Staff_Dist']}}" placeholder="District" required=""><br>
+                    <input name="state" id="state" type="text" value="{{data['up'][0]['Staff_State']}}" placeholder="State" required=""><br>
+                    
+                    <input name="pin" id="pin" type="text" value="{{data['up'][0]['Staff_Pin']}}" placeholder="Pincode" required="" maxlength="6"><br>
+                    
+					
+					
+					<input type="submit" name="update" value="Update">
+				</form>
+			</div>
+			
+		</div>
+	</div>
+    {%else%}
+	<div class="register">
+		<div class="container" >
+			<h3 class="animated wow zoomIn" data-wow-delay=".5s">Add Staff Details</h3>
+			
+			<div class="login-form-grids">
+				
+				<form method="post" class="animated wow slideInUp" data-wow-delay=".5s">
+					<input name="fname" id="fname" type="text" value="" placeholder="Fisrt Name" required=""><br>
+					<input name="lname" id="lname" type="text" value="" placeholder="Last Name" required=""><br>
+                    <input name="num" id="num" type="text" value="" placeholder="Phone Number" required="" maxlength="10"><br>
+                    
+                    <input name="hname" id="hname" type="text" value="" placeholder="House Name" required=""><br>
+                    <input name="street" id="street" type="text" value="" placeholder="Street" required=""><br>
+                    <input name="district" id="district" type="text" value="" placeholder="District" required=""><br>
+                    <input name="state" id="state" type="text" value="" placeholder="State" required=""><br>
+                    
+                    <input name="pin" id="pin" type="text" value="" placeholder="Pincode" required="" maxlength="6"><br>
+                    <input name="uname" id="uname" type="email" value="" placeholder="Username" required="">
+                    <input name="pwd" id="pwd" type="Password" placeholder="Password">
+					
+					
+					<input type="submit" name="register" value="Add">
+				</form>
+			</div>
+			
+		</div>
+	</div>
+<!-- //register -->
+
+{%endif%}
+                        
+                        <center><h1>Staff Details</h1><br>
+<table class="table table-striped" >
+    <tr>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>House Name</th>
+        <th>Street</th>
+        <th>District</th>
+        <th>State</th>
+        <th>Pin</th>
+        <th>Joining Date</th>
+    </tr>
+    {% for i in data['res'] %}
+    <tr>
+        <td>{{ i['Staff_Fname'] }} {{ i['Staff_Lname'] }}</td>
+        <td>{{ i['Staff_Phone'] }}</td>
+        <td>{{ i['Staff_Hname'] }}</td>
+        <td>{{ i['Staff_Street'] }}</td>
+        <td>{{ i['Staff_Dist'] }}</td>
+        <td>{{ i['Staff_State'] }}</td>
+        <td>{{ i['Staff_Pin'] }}</td>
+        <td>{{ i['Staff_Date'] }}</td>
+        <td><a href="?action=update&cid={{i['Staff_ID']}}&un={{i['Username']}}"  class="btn btn-primary">Update</a></td>
+        {% if i['Staff_Status'] == '1' %}
+
+        <td><a href="?action=inactive&cid={{i['Staff_ID']}}&un={{i['Username']}}"  class="btn btn-success">Inactivate</a></td>
+        {% else %}
+        <td><a href="?action=active&cid={{i['Staff_ID']}}&un={{i['Username']}}"  class="btn btn-danger">Activate</a></td>
+
+        {% endif %}
+    </tr>
+    {% endfor %}
+</table>
+</center>
+                    
+    
+    <!-- /login -->
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(function() {
+            $("input[name='fname']").on('input', function(e) {
+                $(this).val($(this).val().replace(/[^A-Za-z ]/g, ''));
+            });
+            $("input[name='lname']").on('input', function(e) {
+                $(this).val($(this).val().replace(/[^A-Za-z ]/g, ''));
+            });
+            
+            
+            
+            $("input[name='num']").on('input', function(e) {
+              $(this).val($(this).val().replace(/[^0-9]/g, ''));
+                
+            });
+            $("input[name='pin']").on('input', function(e) {
+              $(this).val($(this).val().replace(/[^0-9]/g, ''));
+                
+            });
+            $("input[name='uname']").on('input', function(e) {
+                  var re = /([A-Z0-9a-z_-][^@])+?@[^$#<>?]+?\.[\w]{1,}/.test(this.value);
+                    if(!re) {
+                        $('#eerror1').show();
+                        $('#btn').prop('disabled', true);
+                        console.log("err");
+                    } else {
+                        $('#btn').prop('disabled', false);
+                        $('#eerror1').hide();
+                        console.log("err");
+                    }
+    
+            });
+            
+            $("input[name='hname']").on('input', function(e) {
+                $(this).val($(this).val().replace(/[^A-Za-z0-9()/. ]/g, ''));
+    
+            });
+            
+            $("input[name='street']").on('input', function(e) {
+                $(this).val($(this).val().replace(/[^A-Za-z ]/g, ''));
+            });
+
+            $("input[name='district']").on('input', function(e) {
+                $(this).val($(this).val().replace(/[^A-Za-z ]/g, ''));
+            });
+
+            $("input[name='state']").on('input', function(e) {
+                $(this).val($(this).val().replace(/[^A-Za-z ]/g, ''));
+            });
+            
+                
+            $("input[name='pwd']").on('input', function(e) {
+              $(this).val($(this).val().replace(/[^0-9A-Za-z@/. ]/g, ''));
+                
+            });
+        });
+    
+    
+    </script>
+
+{% include 'footer.html' %}

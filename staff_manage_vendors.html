@@ -1,0 +1,144 @@
+
+{% include 'staff_header.html' %}
+
+{%if data['up']%}    
+    <div class="register">
+		<div class="container">
+			<h3 class="animated wow zoomIn" data-wow-delay=".5s">Update Vendor Details</h3>
+
+			<div class="login-form-grids">
+				
+				<form method="post" class="animated wow slideInUp" data-wow-delay=".5s">
+					<input name="vname" id="vname" type="text" value="{{data['up'][0]['Vendor_Name']}}" placeholder="Name" required=""><br>
+                    <input name="email" id="email" type="email" value="{{data['up'][0]['Vendor_Email']}}" placeholder="Email ID" required=""><br>
+                    <input name="num" id="num" type="text" value="{{data['up'][0]['Vendor_Phone']}}" placeholder="Phone Number" required="" maxlength="10"><br>
+                    <input name="hname" id="hname" type="text" value="{{data['up'][0]['Vendor_Hname']}}" placeholder="House Name" required=""><br>
+                    <input name="district" id="district" type="text" value="{{data['up'][0]['Vendor_Dist']}}" placeholder="District" required=""><br>
+                    <input name="state" id="state" type="text" value="{{data['up'][0]['Vendor_State']}}" placeholder="State" required=""><br>
+                    
+                    <input name="pin" id="pin" type="text" value="{{data['up'][0]['Vendor_Pin']}}" placeholder="Pincode" required="" maxlength="6">
+					
+					
+					<input type="submit" name="update" value="Update">
+				</form>
+			</div>
+			
+		</div>
+	</div> 
+   
+
+    {%else%}
+    <div class="register">
+		<div class="container">
+			<h3 class="animated wow zoomIn" data-wow-delay=".5s">Add Vendor Details</h3>
+			
+			<div class="login-form-grids">
+				
+				<form method="post" class="animated wow slideInUp" data-wow-delay=".5s">
+					<input name="vname" id="vname" type="text" value="" placeholder="Name" required=""><br>
+                    <input name="email" id="email" type="email" value="" placeholder="Email ID" required=""><br>
+                    <input name="num" id="num" type="text" value="" placeholder="Phone Number" required="" maxlength="10"><br>
+                    <input name="hname" id="hname" type="text" value="" placeholder="House Name" required=""><br>
+                    <input name="district" id="district" type="text" value="" placeholder="District" required=""><br>
+                    <input name="state" id="state" type="text" value="" placeholder="State" required=""><br>
+                    
+                    <input name="pin" id="pin" type="text" value="" placeholder="Pincode" required="" maxlength="6">
+					
+					
+					<input type="submit" name="submit" value="Add">
+				</form>
+			</div>
+			
+		</div>
+	</div>
+<!-- //register -->
+{%endif%}
+        
+                        <center><h1>Vendor Details</h1></center>
+<table class="table table-striped">
+    <tr>
+        <th>Name</th>
+        <th>Email ID</th>
+        <th>Phone Number</th>
+        <th>House Name</th>
+        <th>District</th>
+        <th>State</th>
+        <th>Pin</th>
+        <th>Joining Date</th>
+        <td colspan=2>Action</td>
+    </tr>
+    {% for i in data['res'] %}
+    <tr>
+        <td>{{ i['Vendor_Name'] }}</td>
+        <td>{{ i['Vendor_Email'] }}</td>
+        <td>{{ i['Vendor_Phone'] }}</td>
+        <td>{{ i['Vendor_Hname'] }}</td>
+        <td>{{ i['Vendor_Dist'] }}</td>
+        <td>{{ i['Vendor_State'] }}</td>
+        <td>{{ i['Vendor_Pin'] }}</td>
+        <td>{{ i['Vendor_Date'] }}</td>
+        <td><a href="?action=update&cid={{i['Vendor_ID']}}"  class="btn btn-primary">Update</a></td>
+        {% if i['Vendor_Status'] == '1' %}
+
+        <td><a href="?action=inactive&cid={{i['Vendor_ID']}}"  class="btn btn-success">Inactivate</a></td>
+        {% else %}
+        <td><a href="?action=active&cid={{i['Vendor_ID']}}"  class="btn btn-danger">Activate</a></td>
+
+        {% endif %}
+    </tr>
+    {% endfor %}
+</table>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(function() {
+            $("input[name='vname']").on('input', function(e) {
+                $(this).val($(this).val().replace(/[^A-Za-z ]/g, ''));
+            });
+           
+            
+            
+            
+            $("input[name='num']").on('input', function(e) {
+              $(this).val($(this).val().replace(/[^0-9]/g, ''));
+                
+            });
+            $("input[name='pin']").on('input', function(e) {
+              $(this).val($(this).val().replace(/[^0-9]/g, ''));
+                
+            });
+            $("input[name='email']").on('input', function(e) {
+                  var re = /([A-Z0-9a-z_-][^@])+?@[^$#<>?]+?\.[\w]{1,}/.test(this.value);
+                    if(!re) {
+                        $('#eerror1').show();
+                        $('#btn').prop('disabled', true);
+                        console.log("err");
+                    } else {
+                        $('#btn').prop('disabled', false);
+                        $('#eerror1').hide();
+                        console.log("err");
+                    }
+    
+            });
+            
+            $("input[name='hname']").on('input', function(e) {
+                $(this).val($(this).val().replace(/[^A-Za-z0-9()/. ]/g, ''));
+    
+            });
+            
+            
+            $("input[name='district']").on('input', function(e) {
+                $(this).val($(this).val().replace(/[^A-Za-z ]/g, ''));
+            });
+
+            $("input[name='state']").on('input', function(e) {
+                $(this).val($(this).val().replace(/[^A-Za-z ]/g, ''));
+            });
+            
+                
+            
+        });
+    
+    
+    </script>
+{% include 'footer.html' %}

@@ -1,0 +1,17 @@
+{% if session['utype'] == 'Staff' %}
+{% include 'staff_header.html' %}
+{% elif session['utype'] == 'admin' %}
+{%include 'admin_header.html'%}
+{% endif %}
+<form method="post">
+	<table class="table table-striped" style="width: 1000px;">
+		<tr>
+			<th>#</th>
+			<th>Vendor Name</th>
+			<th>Category</th>
+			<th></th>
+		</tr>
+	</table>
+</form>
+
+{% include 'footer.html' %}

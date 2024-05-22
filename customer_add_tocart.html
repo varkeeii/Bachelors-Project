@@ -1,0 +1,82 @@
+
+
+
+
+
+
+
+
+
+{% include 'customer_header.html' %}
+<!-- breadcrumbs -->
+  <div class="breadcrumbs">
+    <div class="container">
+      <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
+        <li><a href="index.html"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
+        <li class="active">Single Page</li>
+      </ol>
+    </div>
+  </div>
+<!-- //breadcrumbs -->
+<center>
+  
+<center>
+   <br><br>
+    <div>
+        <form action="" method="post" style="width: 500px;border: 1px solid lightgray;box-shadow: 0px 2px 20px lightgray;padding: 20px;">
+          <br>
+             <table class="table table-hover">
+              
+                <h2><b>Fill This Details To Continue</b></h2>
+                <tr>
+                    <th>Item:</th>
+                    <td><input type="text" value="{{ item }}" readonly name="product" id="" class="form-control"></td>
+                </tr>
+                <tr>
+                    <th>Amount: </th>
+                    <td><input type="number" value="{{ amount }}" readonly name="amount" id="amount" class="form-control">
+        </td>
+                </tr>
+                <br>
+                <tr>
+                    <th>Required Quantity: </th>
+                    <td>  <input required type="number" placeholder="Enter your Quantity" name="quantity" id="qty" class="form-control"></td>
+                </tr>
+                <br>
+                <tr>
+                    <th>Total Amount: </th>
+                    <td> <input type="number" readonly  name="total" id="total" class="form-control"></td>
+                </tr>
+                <br>
+                <tr>
+                    <td align="center" colspan="2"> <input type="submit" name="btn" id="" class="btn btn-outline-success" style="color: red;"></td>
+                </tr>
+         </table>
+    </form>
+    </div>
+   
+</center>
+
+<script>
+
+    var qty = document.getElementById("qty")
+    qty.addEventListener("input",()=> {
+
+        document.getElementById("total").value = document.getElementById("amount").value*document.getElementById("qty").value
+    })
+
+</script>
+    
+</center>
+<!-- single-related-products -->
+  
+<!-- //single-related-products -->
+{% include 'footer.html' %}
+
+
+
+
+
+
+
+

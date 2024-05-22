@@ -1,0 +1,36 @@
+
+{% include 'staff_header.html' %}
+
+<style type="text/css">
+	td,tr,th{
+		border: 1px solid transparent !important;
+	}
+
+	#cat{
+		
+		width: 65%;
+		box-shadow: 10px 10px 10px rgb(46, 66, 66),-2px -2px 4px rgb(138, 141, 158);
+	}
+</style>
+
+<center>
+
+<form method="post">
+	<br><h2 class="p-3">Payment Details</h2><br><br>
+	<table id="cat" class="table table-striped" style="width: 700px;">
+		<tr>
+			<th>#</th>
+			<th>Amount</th>
+			<th>Payment date</th>
+		</tr>
+		{% for i in data['view'] %}
+		<tr>
+			<td>{{loop.index}}</td>
+			<td>{{i['Total_amount']}}</td>
+			<td>{{i['Payment_Date']}}</td>
+		</tr>
+		{% endfor %}
+	</table>
+</form>
+</center>
+

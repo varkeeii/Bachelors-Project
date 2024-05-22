@@ -1,0 +1,99 @@
+{% if session['utype'] == 'Staff' %}
+{% include 'staff_header.html' %}
+{% elif session['utype'] == 'admin' %}
+{%include 'admin_header.html'%}
+{% endif %}
+<center><br>
+ <h4>SEARCH PURCHASE</h4><br>
+ <form method="post">
+   <table style="color: black;width: 100px">
+
+ 
+      <td style="color: rgb(26, 25, 25)"><input type="date" name="dailys" max="{{ data['maxd'] }}" class="form-control"> DAILY </td>
+       <td  style="color: rgb(20, 19, 19)"> <input type="month" name="monthlys" max="{{ data['maxd'] }}" class="form-control"> MONTHLY </td>
+       <td  style="color: rgb(23, 21, 21)"> <input type="text" name="vendor" placeholder="Search by Vendor" class="form-control"> VENDOR </td>
+
+    <tr>
+      <td align="center" colspan="5"><input type="submit" name="sale" class="btn btn-success" value="SEARCH"></td>
+     </tr>
+   
+
+     </tr>
+   </table>
+ </form>
+</center>
+
+     <style type="text/css">
+    @media print{
+      body,body *{
+        visibility: hidden;
+      }
+      #printsec,#printsec *{
+        visibility: visible !important;
+      }
+      #print{
+        display: none;
+      }
+    }
+  </style>
+
+<center><br>
+  <div id="printsec">
+    <link rel="stylesheet" href="static/assets/css/style-starter.css">
+    <font style="font-family:times new roman">
+        <!-- <br><br> -->
+        <h1 style="padding-top: 30px;font-size: 60px; ">Lab Store </h1>
+        <p>
+            <!-- 0926k 4th block, 
+            Attingal, 
+            Trivandrum ,
+                      <br><br> -->
+                  <strong>Phone:</strong> +91 9447129632<br> 
+                  <strong>Email:</strong> Lab Store@gmail.com
+                </p> <hr>
+ <h1> View Purchase Report</h1><br>
+  <form method="post">
+    <table class="table table-striped" border="1" style="width: 1400px;">
+       <tr>
+            <th>Index</th>
+            <th>Vendor name</th>
+            
+            <th>Product Name</th>  
+            
+            <th>Product Image</th>
+            <th>Cost Price</th>
+            <!-- <th>Profit %</th> -->
+            <th>Quantity</th>
+            
+
+            <th>Purchase Date</th>
+      </tr>
+      {% for i in data['report'] %}
+      <tr>
+        <td>{{loop.index}}</td>
+        <td>{{i['Vendor_Name']}} </td>
+        
+        <td>{{i['Item_Name']}}</td>
+        
+        
+        <td><a><img src="/{{i['Item_Image']}}" style="width: 150px; height: 150px;"></a></td>
+        <td>{{i['Cost_Price']}}</td>
+        <!-- <td>{{i['Profit_Percentage']}}</td> -->
+
+        <td>{{i['Quantity']}}</td>
+        <td>{{i['Pur_Date']}}</td>
+
+
+
+      </tr>
+      {% endfor %}
+
+      <!-- <th colspan="7" align="right" style="font-size: 25px;">Grand Total</th> -->
+
+      <!-- <td style="font-size: 20spx">{{data['total_amountss']}}</td> -->
+    </table>
+  </form>
+  <h2><a class="btn btn-success" id="print" onclick="print()"  >print</a></h2>
+<br>
+</div>
+</center>

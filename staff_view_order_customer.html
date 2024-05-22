@@ -1,0 +1,33 @@
+{% include 'staff_header.html' %}
+<center>
+<form method="post">
+	<h2>Details of Customers</h2>
+	<table class="table table-striped" style="width: 700px;">
+		
+		<tr>
+			<th>#</th>
+			<th>Customer Name</th>
+			<th>House Name</th>
+			<th>Street</th>
+			<th>District</th>
+			<th>Pincode</th>
+			<th>Phone</th>
+			<th>Email</th>
+		</tr>
+		{% for i in data['view'] %}
+		<tr>
+			<td>{{loop.index}}</td>
+			<td>{{i['customer_fname']}} {{i['customer_lname']}}</td>
+			<td>{{i['customer_housename']}}</td>
+			<td>{{i['customer_street']}}</td>
+			<td>{{i['customer_dist']}}</td>
+			<td>{{i['customer_pincode']}}</td>
+			<td>{{i['customer_phone']}}</td>
+			<td>{{i['customer_email']}}</td>
+		</tr>
+		{% endfor %}
+		
+	</table>
+</form>
+</center>
+{% include 'footer.html' %}

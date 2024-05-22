@@ -1,0 +1,51 @@
+
+{% include 'staff_header.html' %}
+
+<style type="text/css">
+	td,tr,th{
+		border: 1px solid transparent !important;
+	}
+
+	#cat{
+		
+		width: 65%;
+		box-shadow: 10px 10px 10px rgb(46, 66, 66),-2px -2px 4px rgb(138, 141, 158);
+	}
+</style>
+<center>
+<form method="post">
+	<br><h2 class="p-3">View Customer Orders</h2><br><br>
+	<table id="cat" class="table table-striped" style="width: 1000px;">
+		<tr>
+			<th>Product</th>
+			<th>Product Image</th>
+			<th>Customer</th>
+			<th>Customer Details</th>
+			<th>Payment Details</th>
+			<th></th>
+		</tr>
+		{% for i in data['view']%}
+		<tr>
+			<td>{{i['Item_Name']}}</td>
+			<td><img src="/{{i['Item_Image']}}" width="150px" height="150px"></td>
+			<td>{{i['Cust_Fname']}} {{i['Cust_Lname']}}</td>
+
+			{% if i['Cart_Status']=='checkout'%}
+
+			<td><a href="staff_order_custom_details?cid={{i['Cust_ID']}}" class="btn" class="btn btn-outline-primary">Customer</a></td>
+			<td><a href="staff_view_payment?cid={{i['Cust_ID']}}&omid={{i['CM_ID']}}" class="btn" class="btn btn-outline-primary">View Payment</a></td>
+			<td><a href="staff_assign_courier?cid={{i['Cust_ID']}}&omid={{i['CM_ID']}}&payment_id={{i['Payment_ID']}}" class="btn" class="btn btn-outline-primary">Assign Courier</a></td>
+
+			
+			{% else %}
+			<td><a href="staff_order_custom_details?cid={{i['Cust_ID']}}" class="btn" class="btn btn-outline-primary">Customer</a></td>
+			<td><a href="staff_view_payment?cid={{i['Cust_ID']}}&omid={{i['CM_ID']}}" class="btn" class="btn btn-outline-primary">View Payment</a></td>
+			
+			<td><a href="staff_viewd_delivery_status?omid={{i['CM_ID']}}" class="btn btn-outline-primary">Delivery Status</a></td>
+			{% endif %}
+		</tr>
+		
+		{% endfor %}
+	</table>
+</form>
+</center>

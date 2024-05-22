@@ -1,0 +1,38 @@
+{% if session['utype'] == 'Staff' %}
+{% include 'staff_header.html' %}
+{% elif session['utype'] == 'admin' %}
+{%include 'admin_header.html'%}
+{% endif %}
+<center>
+<form method="post">
+	<h2>Complaints</h2>
+	<table class="table table-striped" style="width: 700px;">
+		<tr>
+			<th>#</th>
+			<th>Customer Name</th>
+			<th>Complaint</th>
+			<th>Date</th>
+			<th>reply</th>
+		</tr>
+		{% for row in data['view'] %}
+		<tr>
+			<td>{{loop.index}}</td>
+			<td>{{row['customer_fname']}} {{row['customer_lname']}}</td>
+			<td>{{row['complaint']}}</td>
+			<td>{{row['date']}}</td>
+			
+			{% if row['reply'] == "pending" %}
+	
+
+				<td><input type="text" name="reply{{loop.index}}"><input type="submit" name="submit{{loop.index}}" value="submit" class="btn"></td>
+				{% else %}
+				<td>{{row['reply']}}</td>
+				{% endif %}
+
+		</tr>
+		{% endfor %}
+	</table>
+</form>
+</center>
+
+{% include 'footer.html' %}

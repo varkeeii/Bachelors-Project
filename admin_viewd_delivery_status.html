@@ -1,0 +1,28 @@
+{% if session['utype'] == 'Staff' %}
+{% include 'staff_header.html' %}
+{% elif session['utype'] == 'admin' %}
+{%include 'admin_header.html'%}
+{% endif %}
+<style type="text/css">
+    td,tr,th{
+        border: 1px solid transparent !important;
+    }
+
+    #cat{
+        
+        width: 65%;
+        box-shadow: 10px 10px 10px rgb(46, 66, 66),-2px -2px 4px rgb(138, 141, 158);
+    }
+</style>
+
+<center>
+    <br><br>
+    <h3 class="p-3"><b>Order Status</h3></b>
+    <br><br><br>
+
+    <div>
+        <span><b>Current delivery Status for this Order is {{ data['res'][0]['Cart_Status'] }}</b> </span>
+        <br><br><br>
+    </div>
+</center>
+{% include 'footer.html' %}

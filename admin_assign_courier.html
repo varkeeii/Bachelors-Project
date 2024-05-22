@@ -1,0 +1,34 @@
+{% if session['utype'] == 'Staff' %}
+{% include 'staff_header.html' %}
+{% elif session['utype'] == 'admin' %}
+{%include 'admin_header.html'%}
+{% endif %}
+
+        <!-- register -->
+        <div class="register">
+            <div class="container">
+                <h3 class="animated wow zoomIn" data-wow-delay=".5s">Assign Courier</h3>
+                
+                <div class="login-form-grids">
+                    
+                    <form method="post" class="animated wow slideInUp" data-wow-delay=".5s">
+                        <select name="cname" id="cname" class="content-input-field form-control"  style="background:rgba(0, 123, 255, 0.06);margin-bottom:15px;height:50px" >
+                            <option value="">Select Courier</option>
+                            {% for i in data['cname'] %}
+                            <option value="{{i['Cour_ID']}}">{{i['Cour_Name']}}</option>
+                            {% endfor %}
+                        </select>
+                        
+    
+                        
+                 
+                        
+                        <input type="submit" name="submit" value="Assign Courier">
+                        </form>
+                    
+                </div>
+                
+            </div>
+        </div>
+
+        {% include 'footer.html' %}

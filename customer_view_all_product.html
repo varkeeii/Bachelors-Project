@@ -1,0 +1,134 @@
+{%include 'customer_header.html'%}
+
+
+            <!-- <div class="search-form ml-auto" style="margin-right: 150px;">
+                <div class="form-w3layouts-grid">
+                    <form action="#" method="post" class="newsletter">
+                        <input name="search" class="search" type="search" placeholder="Search here..." required="">
+                        <button type="submit" name="srch" class="form-control btn" style="color: brown;" value=""><span class="fa fa-search"></span></button>
+                    </form>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+
+
+
+
+
+ breadcrumbs -->
+	<div class="breadcrumbs">
+		<div class="container">
+			<ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
+				<li><a href="customer_home"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
+				<li class="active">Collections</li>
+			</ol>
+		</div>
+	</div>
+    <div class="" style="display: flex;justify-content: center;align-items: center;" >
+		
+    
+            <!-- search-scripts -->
+            <script src="static/js/classie.js"></script>
+            <script src="static/js/uisearch.js"></script>
+                <script>
+                    new UISearch( document.getElementById( 'sb-search' ) );
+                </script>
+            <!-- //search-scripts -->
+
+			<div style="position: relative;top: 80px;">
+				<form method="post"  style="display: flex;">
+                    <input class="form-control" style="width: 600px;" placeholder="Enter your search term..." type="search" id="" name="search">
+                    <input class="btn btn-success" type="submit" style="border-radius: 0%;" name="srch" value="Search">
+                </form>
+			</div>
+    </div> 
+
+	<style>
+		.s-input {
+	position: absolute;
+    top: 0px;
+    left: 0px;
+    border: none;
+    outline: none;
+    background:#F5F5F5;
+    width: 100%;
+    height: 50px;
+    margin: 0;
+    z-index: 10;
+    font-size:14px;
+    color: #999;
+    padding-left: 1em;
+    padding-right: 4em;
+}
+	</style>
+	<div class="products">
+
+						<script type='text/javascript'>//<![CDATA[ 
+						$(window).load(function(){
+						 $( "#slider-range" ).slider({
+								range: true,
+								min: 0,
+								max: 100000,
+								values: [ 20000, 80000 ],
+								slide: function( event, ui ) {  $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+								}
+					 });
+					$( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) + " - $" + $( "#slider-range" ).slider( "values", 1 ) );
+
+
+						});//]]>
+						</script>
+						<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+					 <!---->
+				</div>
+				
+					</div>
+					
+				</div>
+				
+			</div>
+	
+			{% if data['item'] %}
+			
+				<div class="products-right-grids-bottom">
+                    {% for row in data['item']%}
+					<div class="col-md-4 products-right-grids-bottom-grid " style="margin-top: 20px;">
+						<div class="new-collections-grid1 products-right-grid1 animated wow slideInUp" data-wow-delay=".5s">
+							<div class="new-collections-grid1-image">
+								<a href="customer_view_product" class="product-image"><img style="height: 250px;width: 350px;" src="/{{row['Item_Image']}}" alt=" " class="img-responsive"></a>
+								<div class="new-collections-grid1-image-pos products-right-grids-pos">
+									<!-- <a href="customer_view_product?id={{row['Item_ID']}}&iname={{row['Item_Name']}}&price={{row['price']}}">Quick View</a> -->
+								</div>
+								<div class="new-collections-grid1-right products-right-grids-pos-right">
+									
+								</div>
+							</div>
+							<h4><a href="customer_view_product"><span style="width: 100px !important;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;display: inline-block;">{{row['Item_Name']}}</span></a></h4>
+							<!-- <p>{{row['description']}}</p> -->
+							<p>Stock : {{row['Stock']}}</p>
+							<div class="simpleCart_shelfItem products-right-grid1-add-cart">
+								{% if row['Stock'] | int > 0 %}
+								
+								<p> <span class="item_price">{{row['price']}}</span><a class="item_add" href="customer_view_product?id={{row['Item_ID']}}&iname={{row['Item_Name']}}&price={{row['price']}}">view product </a></p>
+								
+								{% else %}
+								<p> <span  class="item_price">{{row['price']}}</span><a style="color: red;background-color: red;color: white;" class="item_add" href="">Out of Stock</a></p>
+								
+								{% endif %}
+							</div>
+						</div>
+						
+			</div>
+            {% endfor %}
+			<div class="clearfix"> </div>
+			{% else %}
+			<center>
+
+				<h2 style="font-size: 40px;color: red;">No Results</h2>
+			</center>
+			{% endif %}
+		</div>
+        
+	</div>
+<!-- //breadcrumbs -->

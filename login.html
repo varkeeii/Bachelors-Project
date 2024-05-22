@@ -1,0 +1,61 @@
+{%include 'public_header.html'%}
+
+    </div>
+	
+
+    <!-- //banner-->
+	<hr style="height:2px;border-width:0;color:gray;background-color:gray">
+
+    <!-- login -->
+	<div class="login">
+		<div class="container">
+			<h3 class="animated wow zoomIn" data-wow-delay=".5s">Login Form</h3>
+			<!-- <p class="est animated wow zoomIn" data-wow-delay=".5s">Welcome Back..... Sign in with your Username and Password</p> -->
+			<div class="login-form-grids animated wow slideInUp" data-wow-delay=".5s">
+				<form method="post">
+					<input name="uname" id="uname" type="email" value="" placeholder="User Name" required="">
+					<input name="pwd" id="pwd" type="Password" placeholder="Password">
+					
+					<input type="submit" value="Login" name="login">
+					
+				</form>
+			</div>
+			<h4 class="animated wow slideInUp" data-wow-delay=".5s">For New People</h4>
+			<p class="animated wow slideInUp" data-wow-delay=".5s"><a href="registration">Register Here</a> </p>
+		</div>
+	</div>
+</div>
+<!-- //login -->
+{%include 'footer.html'%}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    $(function() {
+$("input[name='uname']").on('input', function(e) {
+	var re = /([A-Z0-9a-z_-][^@])+?@[^$#<>?]+?\.[\w]{1,}/.test(this.value);
+	  if(!re) {
+		  $('#eerror1').show();
+		  $('#btn').prop('disabled', true);
+		  console.log("err");
+	  } else {
+		  $('#btn').prop('disabled', false);
+		  $('#eerror1').hide();
+		  console.log("err");
+	  }
+
+});
+});
+
+
+</script>
+
+
+<script src = "http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src = "http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>
+    $(document).ready(function() {
+       function disablePrev() { window.history.forward() }
+       window.onload = disablePrev();
+       window.onpageshow = function(evt) { if (evt.persisted) disableBack() }
+    });
+ </script>

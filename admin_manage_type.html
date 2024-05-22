@@ -1,0 +1,74 @@
+{% if session['utype'] == 'Staff' %}
+{% include 'staff_header.html' %}
+{% elif session['utype'] == 'admin' %}
+{%include 'admin_header.html'%}
+{% endif %}
+                        {%if data['up']%}
+                      
+
+                        <!-- register -->
+<div class="register">
+    <div class="container">
+        <h3 class="animated wow zoomIn" data-wow-delay=".5s">Update</h3> Type</h3>
+        
+        <div class="login-form-grids">
+            
+            <form method="post" class="animated wow slideInUp" data-wow-delay=".5s">
+
+                <input name="typ" id="typ" type="text" value="{{data['up'][0]['Type_Name']}}" placeholder="Type" required="">
+                <input type="submit" name="update" value="Update">
+
+            </form>
+        </div>
+        
+    </div>
+</div>
+<!-- //register -->
+                        {%else%}
+
+
+                     
+    
+<!-- register -->
+<div class="register">
+    <div class="container">
+        <h3 class="animated wow zoomIn" data-wow-delay=".5s">Add Type</h3>
+        
+        <div class="login-form-grids">
+            
+            <form method="post" class="animated wow slideInUp" data-wow-delay=".5s">
+
+                <input name="typ" id="typ" type="text" value="" placeholder="Type" required="">
+                <input type="submit" name="submit" value="Add">
+
+            </form>
+        </div>
+        
+    </div>
+</div>
+<!-- //register -->
+{%endif%}
+                        <br>
+                        <center><h1>View Type</h1></center>
+<table class="table table-striped" >
+    <tr>
+        <th>Type Name</th>
+        <td colspan=2>Action</td>
+    </tr>
+    {% for i in data['res'] %}
+    <tr>
+        <td>{{ i['Type_Name'] }}</td>
+        
+        <td><a href="?action=update&cid={{i['Type_ID']}}"  class="btn btn-primary">Update</a></td>
+        {% if i['Type_Status'] == '1' %}
+
+        <td><a href="?action=inactive&cid={{i['Type_ID']}}"  class="btn btn-success">Inactivate</a></td>
+        {% else %}
+        <td><a href="?action=active&cid={{i['Type_ID']}}"  class="btn btn-danger">Activate</a></td>
+
+        {% endif %}
+    </tr>
+    {% endfor %}
+</table>
+
+{% include 'footer.html' %}

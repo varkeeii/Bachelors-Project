@@ -1,0 +1,93 @@
+{%include 'customer_header.html'%}
+{%if data['up']%}
+<div class="register">
+    <div class="container">
+        <h3 class="animated wow zoomIn" data-wow-delay=".5s">Update Your Details</h3>
+        
+        <div class="login-form-grids">
+            
+            <form method="post" class="animated wow slideInUp" data-wow-delay=".5s">
+                
+                <input name="fname" id="fname" type="text" value="{{data['up'][0]['Cust_Fname']}}" placeholder="Fisrt Name" required=""><br>
+                <input name="lname" id="lname" type="text" value="{{data['up'][0]['Cust_Lname']}}" placeholder="Last Name" required=""><br>
+                <input name="num" id="num" type="text" value="{{data['up'][0]['Cust_Phone']}}" placeholder="Phone Number" required=""><br>
+                <input name="gender" id="gender" type="text" value="{{data['up'][0]['gender']}}" placeholder="Gender" required=""><br>
+                <input name="hname" id="hname" type="text" value="{{data['up'][0]['Cust_Hname']}}" placeholder="House Name" required=""><br>
+                <input name="street" id="street" type="text" value="{{data['up'][0]['Cust_Street']}}" placeholder="Street" required=""><br>
+                <input name="district" id="district" type="text" value="{{data['up'][0]['Cust_Dist']}}" placeholder="District" required=""><br>
+                <input name="state" id="state" type="text" value="{{data['up'][0]['Cust_State']}}" placeholder="State" required=""><br>
+                
+                <input name="pin" id="pin" type="text" value="{{data['up'][0]['Cust_Pincode']}}" placeholder="Pincode" required=""><br>
+                
+                
+                
+                
+                <input type="submit" name="update" value="Update">
+           
+            </form>
+        </div>
+        
+    </div>
+</div>
+{%endif%}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(function() {
+            $("input[name='fname']").on('input', function(e) {
+                $(this).val($(this).val().replace(/[^A-Za-z ]/g, ''));
+            });
+            $("input[name='lname']").on('input', function(e) {
+                $(this).val($(this).val().replace(/[^A-Za-z ]/g, ''));
+            });
+            
+            
+            
+            $("input[name='num']").on('input', function(e) {
+              $(this).val($(this).val().replace(/[^0-9]/g, ''));
+                
+            });
+            $("input[name='pin']").on('input', function(e) {
+              $(this).val($(this).val().replace(/[^0-9]/g, ''));
+                
+            });
+            $("input[name='uname']").on('input', function(e) {
+                  var re = /([A-Z0-9a-z_-][^@])+?@[^$#<>?]+?\.[\w]{1,}/.test(this.value);
+                    if(!re) {
+                        $('#eerror1').show();
+                        $('#btn').prop('disabled', true);
+                        console.log("err");
+                    } else {
+                        $('#btn').prop('disabled', false);
+                        $('#eerror1').hide();
+                        console.log("err");
+                    }
+    
+            });
+            
+            $("input[name='hname']").on('input', function(e) {
+                $(this).val($(this).val().replace(/[^A-Za-z0-9()/. ]/g, ''));
+    
+            });
+            
+            $("input[name='street']").on('input', function(e) {
+                $(this).val($(this).val().replace(/[^A-Za-z0-9 ]/g, ''));
+            });
+
+            $("input[name='district']").on('input', function(e) {
+                $(this).val($(this).val().replace(/[^A-Za-z ]/g, ''));
+            });
+
+            $("input[name='state']").on('input', function(e) {
+                $(this).val($(this).val().replace(/[^A-Za-z ]/g, ''));
+            });
+            
+                
+            $("input[name='pwd']").on('input', function(e) {
+              $(this).val($(this).val().replace(/[^0-9A-Za-z@/. ]/g, ''));
+                
+            });
+        });
+    
+    
+    </script>

@@ -1,0 +1,87 @@
+
+{% include 'staff_header.html' %}
+
+                        {%if data['up']%}
+                        
+
+                        <!-- register -->
+ <div class="register">
+    <div class="container">
+        <h3 class="animated wow zoomIn" data-wow-delay=".5s">Update Category</h3>
+        
+        <div class="login-form-grids"> 
+           
+            <form method="post" class="animated wow slideInUp" data-wow-delay=".5s">
+
+                <input name="cat" id="cat" type="text" value="{{data['up'][0]['Cat_Name']}}" placeholder="Category" required="">
+                <br>
+                <input name="desc" id="cat" type="text" value="{{data['up'][0]['Cat_desc']}}" placeholder="Description" required="">
+                <input type="submit" name="update" value="Update">
+
+            </form>
+        </div>
+        
+    </div>
+</div>
+<!-- //register -->
+                        {%else%}
+
+                        
+ <!-- register -->
+ <div class="register">
+    <div class="container">
+        <h3 class="animated wow zoomIn" data-wow-delay=".5s">Add Category</h3>
+        
+        <div class="login-form-grids">
+            
+            <form method="post" class="animated wow slideInUp" data-wow-delay=".5s">
+
+                <input name="cat" id="cat" type="text" value="" placeholder="Category" required="">
+                <br>
+                <input name="desc" id="cat" type="text" value="" placeholder="Description" required="">
+                <input type="submit" name="submit" value="Add">
+
+            </form>
+        </div>
+        
+    </div>
+</div>
+<!-- //register -->
+
+{%endif%}
+                        <br>
+                        <center><h1>View Category</h1></center>
+<table class="table table-striped">
+    <tr>
+        <th>Category Name</th>
+        <th>Category Description</th>
+        <td colspan=2>Action</td>
+    </tr>
+    {% for i in data['res'] %}
+    <tr>
+        <td>{{ i['Cat_Name'] }}</td>
+        <td>{{ i['Cat_desc'] }}</td>
+        
+        <td><a href="?action=update&cid={{i['Cat_ID']}}"  class="btn btn-primary">Update</a></td>
+        {% if i['Cat_Status'] == '1' %}
+
+        <td><a href="?action=inactive&cid={{i['Cat_ID']}}"  class="btn btn-success">Inactivate</a></td>
+        {% else %}
+        <td><a href="?action=active&cid={{i['Cat_ID']}}"  class="btn btn-danger">Activate</a></td>
+
+        {% endif %}
+    </tr>
+    {% endfor %}
+</table>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(function() {
+            $("input[name='cat']").on('input', function(e) {
+                $(this).val($(this).val().replace(/[^A-Za-z ]/g, ''));
+            });
+        });
+    </script>
+    {% include 'footer.html' %}
+    

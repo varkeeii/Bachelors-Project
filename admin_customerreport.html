@@ -1,0 +1,68 @@
+
+<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+<!-- timer -->
+
+<script> 
+    function printDiv() { 
+      var divContents = document.getElementById("div_print").innerHTML; 
+      var a = window.open('', '', 'height=500, width=500'); 
+      a.document.write(divContents); 
+      a.document.close(); 
+      a.print(); 
+    } 
+  </script> 
+
+
+
+<body onload="printDiv()">
+  <div id="div_print" >
+      <center>
+          <link rel="stylesheet" href="static/assets/css/style-starter.css">
+          <font style="font-family:times new roman">
+              <br><br>
+              <h1 style="padding-top: 30px;font-size: 60px; background-color:rgb(227, 231, 39)">tsánta Store </h1>
+              <p>
+                  <!-- 0926k 4th block, 
+                  Attingal, 
+                  Trivandrum ,
+                            <br><br> -->
+                        <strong>Phone:</strong> +91 9447129632<br> 
+                        <strong>Email:</strong> Lab Store@gmail.com<br> 
+                      </p> <hr>
+          <h1 style="padding-top: 30px;font-size: 40px; color:rgb(159, 159, 47);">Customer Report</h1><br>`
+          <!-- <h1>View Sales</h1> -->
+<table border=1 class="table table-secondary table-striped " style="width: 1200px;color: black;background:white;opacity: 0.85;">
+  <tr style="background-color: rgb(207, 227, 137);">
+    <th>Index</th>
+   <th>Name</th>
+   <th>Phone</th>
+   <th>Housename</th>
+   <th>Street</th>
+   <th>District</th>
+   <th>Pincode</th>
+  
+
+  </tr>
+          
+
+  {% for i in data['r'] %}
+</tr>
+        
+   
+<td>{{loop.index}}</td>
+<td>{{ i['Cust_Fname'] }} {{ i['Cust_Lname'] }}</td>
+<td>{{ i['Cust_Phone'] }}</td>
+<td>{{ i['Cust_Hname'] }}</td>
+<td>{{ i['Cust_Street'] }}</td>
+<td>{{ i['Cust_Dist'] }}</td>
+<td>{{ i['Cust_Pincode'] }}</td>
+
+      
+     
+    </tr>
+     {% endfor %}
+     </table>
+
+
+

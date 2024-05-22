@@ -1,0 +1,48 @@
+{% if session['utype'] == 'Staff' %}
+{% include 'staff_header.html' %}
+{% elif session['utype'] == 'admin' %}
+{%include 'admin_header.html'%}
+{% endif %}
+<center>
+<br><h1>View Customer</h1><br><br>
+<form method="post">
+<table class="table table-striped" >
+    <tr>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Housename</th>
+        <th>Street</th>
+        <th>District</th>
+        <th>State</th>
+        <th>Pincode</th>
+       
+        <th>Action</th>
+        
+
+        
+    </tr>
+    {% for i in data['res'] %}
+    <tr>
+        <td>{{ i['Cust_Fname'] }} {{ i['Cust_Lname'] }}</td>
+        <td>{{ i['Cust_Phone'] }}</td>
+        <td>{{ i['Cust_Hname'] }}</td>
+        <td>{{ i['Cust_Street'] }}</td>
+        <td>{{ i['Cust_Dist'] }}</td>
+        <td>{{ i['Cust_State'] }}</td>
+        <td>{{ i['Cust_Pincode'] }}</td>
+       
+        
+        
+        
+        <!-- <td><a href="?action=update&cid={{i['s_id']}}"  class="btn btn-primary">Update</a></td> -->
+        {% if i['Status'] | int == 1 %}
+        <td><a href="?action=inactive&cid={{i['Cust_ID']}}&un={{i['Username']}}"  class="btn btn-success">Inactivate</a></td>
+        {% else %}
+        <td><a href="?action=active&cid={{i['Cust_ID']}}&un={{i['Username']}}"  class="btn btn-danger">Activate</a></td>
+        
+        {% endif %}
+    </tr>
+    {% endfor %}
+</table>
+</form>
+</center>

@@ -1,0 +1,108 @@
+{% if session['utype'] == 'Staff' %}
+{% include 'staff_header.html' %}
+{% elif session['utype'] == 'admin' %}
+{%include 'admin_header.html'%}
+{% endif %}
+
+                        {%if data['up']%}
+              
+
+
+     <!-- register -->
+  <div class="register">
+    <div class="container">
+        <h3 class="animated wow zoomIn" data-wow-delay=".5s">Update Item</h3>
+        
+        <div class="login-form-grids">
+            
+            <form method="post" enctype="multipart/form-data" class="animated wow slideInUp" data-wow-delay=".5s">
+             <table>  
+            <tr><th>Item Name </th><td><input name="itemname" id="itemname" type="text" value="{{data['up'][0]['Item_Name']}}" placeholder="Item Name"></td></tr><br>
+            <tr><th>Item Description </th><td><textarea name="des" id="des"  placeholder="Description">{{data['up'][0]['Description']}}</textarea></td></tr>
+            <tr><th>Profit Percentage </th><td><input name="profper" id="profper" type="text" value="{{data['up'][0]['Profit_Percentage']}}" placeholder="Profit Percentage"></td></tr>
+            <!-- <input name="img" id="img" type="file" value="{{data['up'][0]['Item_Image']}}" placeholder="Main Image">
+            <input name="img1" id="img1" type="file" value="{{data['up'][0]['img1']}}" placeholder="Image1">
+            <input name="img2" id="img2" type="file" value="{{data['up'][0]['img2']}}" placeholder="Image2">
+             --></table>
+           
+                
+                
+                <input type="submit" name="update" value="Update">
+            </form>
+        </div>
+        
+    </div>
+</div>
+<!-- //register -->
+                        {%else%}
+
+        
+  <!-- register -->
+  <div class="register">
+    <div class="container">
+        <h3 class="animated wow zoomIn" data-wow-delay=".5s">Add Item</h3>
+        
+        <div class="login-form-grids">
+            
+            <form method="post" enctype="multipart/form-data" class="animated wow slideInUp" data-wow-delay=".5s">
+                <select name="cat" id="cat" class="content-input-field form-control" style="background:rgba(0, 123, 255, 0.06);margin-bottom:15px;height:50px" >
+                    <option value="">Select Category</option>
+                    {% for i in data['cat'] %}
+                    <option value="{{i['Cat_ID']}}">{{i['Cat_Name']}}</option>
+                    {% endfor %}
+                </select>
+              
+            <input required name="itemname" id="itemname" type="text" placeholder="Item Name"><br>
+            <textarea required name="des" id="des" class="form-control" placeholder="Description"></textarea><br>
+            <input required name="profper" id="profper" type="text" placeholder="Profit Percentage"><br>
+            <input required name="img" class="form-control" id="img" type="file" placeholder="Main Image">
+            <!-- <input name="img1" id="img1" type="file" placeholder="Image1">
+            <input name="img2" id="img2" type="file" placeholder="Image2">
+            
+            -->
+                
+                
+                <input type="submit" name="submit" value="Add">
+            </form>
+        </div>
+        
+    </div>
+</div>
+<!-- //register -->
+
+{%endif%}
+        <br>
+                        <center><h1>View Item</h1></center>
+<table class="table table-striped" >
+    <tr>
+        <th>Item Name</th>
+        <th>Category</th>
+
+        <th>Description</th>
+        <th>Stock</th>
+        <td >Image</td>
+        <th>Profit Percentage</th>
+    </tr>
+    {% for i in data['res'] %}
+    <tr>
+        <td>{{ i['Item_Name'] }}</td>
+        <td>{{ i['Cat_Name'] }}</td>
+    
+        <td>{{ i['Description'] }}</td>
+        <td>{{ i['Stock'] }}</td>
+        <td><a href="/{{ i['Item_Image'] }}"><img src="/{{ i['Item_Image'] }}" height="100" width="100"></td>
+     
+        <td>{{ i['Profit_Percentage'] }}</td>
+        <td><a href="?action=update&cid={{i['Item_ID']}}"  class="btn btn-primary">Update</a></td>
+        {% if i['Item_Status'] == '1' %}
+
+        <td><a href="?action=inactive&cid={{i['Item_ID']}}"  class="btn btn-primary">inactive</a></td>
+        {% else %}
+        <td><a href="?action=active&cid={{i['Item_ID']}}"  class="btn btn-primary">active</a></td>
+
+        {% endif %}
+    </tr>
+    {% endfor %}
+</table>
+{% include 'footer.html' %}
+    
